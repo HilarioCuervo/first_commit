@@ -1,6 +1,6 @@
 import csv
 
-archivo = open('appstore_games.csv', 'r', encoding = 'utf-8')
+archivo = open('Ejercicios/FilesExtra/appstore_games.csv', 'r', encoding = 'utf-8')
 arch_reader = csv.reader(archivo, delimiter = ',')
 
 next(arch_reader)
@@ -12,7 +12,7 @@ for game in arch_reader:
     if ('ES' in game[12]) and (game[7] == '0'):
         juegos_español.append(game[2])
     try:
-        ratings.append(int(game[6].replace("'","")))
+        ratings.append((int(game[6].replace("'","")),game[0]))
     except ValueError:
         pass
 
@@ -21,10 +21,10 @@ for game in juegos_español:
     print(game)
 
 
-ratings = sorted(ratings, key = lambda rate: rate, reverse = True)
+ratings = sorted(ratings, key = lambda aux: aux[0], reverse = True)
 
 print('Los 10 mejores calificados:')
 for i in range(0,10):
-    print(ratings[i])
+    print(ratings[i][1])
    
 
